@@ -10,21 +10,7 @@ import {
 import COLORS from "../constants/colors";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Axios, note_endpoints } from "../constants/axios";
-
-const DATA = [
-  {
-    id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-    title: "+",
-  },
-  {
-    id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-    title: "All",
-  },
-  {
-    id: "58694a0f-3da1-471f-bd96-145571e29d72",
-    title: "Third Item",
-  },
-];
+import { useIsFocused } from "@react-navigation/native";
 
 const Item = ({ item, onPress, backgroundColor, textColor }) => (
   <TouchableOpacity
@@ -36,8 +22,9 @@ const Item = ({ item, onPress, backgroundColor, textColor }) => (
 );
 
 const App = ({ setToggleCat }) => {
+  const isFocused = useIsFocused();
   const [selectedId, setSelectedId] = useState();
-  const [categories, setCategories] = useState([""]);
+  const [categories, setCategories] = useState([]);
   const [token, setToken] = useState("");
 
   const getCategories = async (token) => {
@@ -61,8 +48,10 @@ const App = ({ setToggleCat }) => {
   };
 
   useEffect(() => {
-    getToken();
-  }, []);
+    if (isFocused) {
+      getToken();
+    }
+  }, [isFocused]);
 
   const renderItem = ({ item }) => {
     const backgroundColor =
