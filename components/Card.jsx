@@ -14,73 +14,6 @@ import Notes from "./Notes";
 import { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useIsFocused } from "@react-navigation/native";
-const DATA = [
-  {
-    id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-    title: "First Item",
-    importancia: "XX",
-  },
-  {
-    id: "qujsaksd hasjdaisud hasdjaskjdhakj shdkashdasudasdjkasda sndmasndkasmndakuknzxncbzxncbm znxbc mznxbcmzxnbcmznxbcmzxn",
-    title: "Second Item",
-  },
-  {
-    id: "sahdasdgkas klaskjhduasmajua aksjbdfakgcviasjkl aosihdaoisfhoasmka asjkdhaiusfhaksfna aasidhaoksd asjhdaoidhi",
-    title: "Third Item",
-  },
-  {
-    id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-    title: "First Item",
-  },
-  {
-    id: "qujsaksd hasjdaisud hasdjaskjdhakj shdkashdasudasdjkasda sndmasndkasmndakuknzxncbzxncbm znxbc mznxbcmzxnbcmznxbcmzxn",
-    title: "Second Item",
-  },
-  {
-    id: "sahdasdgkas klaskjhduasmajua aksjbdfakgcviasjkl aosihdaoisfhoasmka asjkdhaiusfhaksfna aasidhaoksd asjhdaoidhi",
-    title: "Third Item",
-  },
-  {
-    id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-    title: "First Item",
-  },
-  {
-    id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-    title: "First Item",
-  },
-  {
-    id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-    title: "First Item",
-  },
-  {
-    id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-    title: "First Item",
-  },
-  {
-    id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-    title: "First Item",
-  },
-  {
-    id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-    title: "First Item",
-  },
-  {
-    id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-    title: "First Item",
-  },
-  {
-    id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-    title: "First Item",
-  },
-  {
-    id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-    title: "First Item",
-  },
-  {
-    id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-    title: "First Item",
-  },
-];
 
 export default function Card({ toggleFav, toggleCat }) {
   const [notes, setNotes] = useState([]);
@@ -97,21 +30,7 @@ export default function Card({ toggleFav, toggleCat }) {
       console.log(toggleCat);
     });
   };
-  // const getNotes = async (token) => {
-  //   try {
-  //     console.log(`token: ${token}`);
-  //     const response = await Axios.get(note_endpoints.getNotes, {
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //     });
-  //     const notes = response.data.notes;
-  //     setNotes(notes.sort((a, b) => a.priority - b.priority));
-  //     // console.log(notes);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+
   const getNotes = async (token) => {
     try {
       console.log(`token: ${token}`);
@@ -174,9 +93,9 @@ export default function Card({ toggleFav, toggleCat }) {
   return (
     <View>
       {toggleFav === false
-        ? notes.map((faq, index) => (
+        ? notes.map((faq) => (
             <Notes
-              key={index.toString()}
+              key={faq._id}
               title={faq.title}
               details={faq.description}
               categoria={faq.category}
@@ -186,9 +105,9 @@ export default function Card({ toggleFav, toggleCat }) {
               onDelete={deleteNote}
             />
           ))
-        : favoriteNotes.map((faq, index) => (
+        : favoriteNotes.map((faq) => (
             <Notes
-              key={index.toString()}
+              key={faq._id}
               title={faq.title}
               details={faq.description}
               categoria={faq.category}
